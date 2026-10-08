@@ -62,7 +62,7 @@ footer .fine{max-width:70ch}
  <div class="box">
   <canvas id="g" tabindex="0" aria-label="Simulated calcium imaging field of view. Click a cell to stimulate it."></canvas>
   <canvas id="r" aria-label="Fluorescence traces of 14 cells"></canvas>
-  <div class="bar"><span id="now">Press start, then click cells to fire them.</span><span id="take">Take: empty</span></div>
+  <div class="bar"><span id="now">Press start, then click cells to fire them.</span><span id="take">Take: empty</span><span id="ioshint" hidden> · 🔊 iPhone: turn silent mode off to hear sound</span></div>
  </div>
  <div class="box ctl">
   <button class="main" id="play">Start</button>
@@ -258,7 +258,8 @@ for(const id of['sp','cp','tau','lut','sc','bpm','snap','wire'])$(id).addEventLi
   document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);
   $('now').textContent='Saved. Unzip it to get the .mid file.'}})();
 S=read();fit();reset(true);
-if(/iPhone|iPad|iPod/.test(navigator.userAgent))$('now').textContent+=' (iPhone: turn silent mode off to hear sound)';
+var isiOS=/iPhone|iPad|iPod/.test(navigator.userAgent||'')||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+$('ioshint').hidden=!isiOS;
 requestAnimationFrame(frame);
 </script>
 </body>
